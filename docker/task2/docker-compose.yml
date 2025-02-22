@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  ubuntu:
+    container_name: ubuntu_container
+    build: . 
+    tty: true
+    networks:
+      - default_link
+  db:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: abc_123
+      POSTGRES_DB: mydb
+    networks:
+      - default_link
+
+networks:
+  default_link:
+    driver: bridge

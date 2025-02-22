@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: .
+    volumes:
+      - ./logs:/var/log/nginx
+    ports:
+      - "8080:80"

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    build: ./simple-webapp-flask/
+    environment:
+      - PORT=5000
+    networks:
+      - loadbalancing
+
+  
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80" 
+    networks:
+      - loadbalancing
+    depends_on:
+      - web
+
+networks:
+  loadbalancing:
