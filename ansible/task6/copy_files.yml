@@ -1,0 +1,9 @@
+---
+- name: Copy index.html
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html

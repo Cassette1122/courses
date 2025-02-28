@@ -1,0 +1,28 @@
+---
+- name: Manage user
+  hosts: all
+  become: yes
+  vars:
+    username: ansible_user
+    password: "b607470c8afa2bccf6ac41683fa9643d1f1b4599ddba13b505c25be47b3bae554c2328848887707c07fd4893a34a41241f9c023fc2e6e16847e482980b340095"
+
+  tasks:
+    - name: Add user to all groups
+      ansible.builtin.user:
+        name: "{{ username }}"
+        password: "{{ password }}"
+        state: present
+        shell: /bin/bash
+        createhome: yes
+    - name: Add user to sudo group
+      ansible.builtin.user:
+        name: "{{ username }}"
+        groups: sudo
+        append: yes
+      when: ansible_distribution == "Ubuntu"
+    - name: Add user to wheel group
+      ansible.builtin.user:
+        name: "{{ username }}"
+        groups: wheel
+        append: yes
+      when: ansible_distribution == "Fedora"
