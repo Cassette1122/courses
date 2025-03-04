@@ -1,0 +1,33 @@
+---
+- name: Configuring the firewall
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install ufw on Ubuntu
+      apt:
+        name: ufw
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Enable 80 port in Ubuntu
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Enable 80 port on Fedora
+      firewalld:
+        port: 80/tcp
+        permanent: yes
+        state: enabled
+      when: ansible_distribution == "Fedora"
+
+    - name: Install curl on Ubuntu
+      apt:
+        name: curl
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+

@@ -3,28 +3,28 @@
   hosts: all
   become: yes
   tasks:
-    - name: Install nginx in Ubuntu
-      ansible.builtin.apt:
+    - name: Install nginx on Ubuntu
+      apt:
         name: nginx
         state: present
         update_cache: yes
       when: ansible_distribution == "Ubuntu"
 
-    - name: Start nginx in Ubuntu
-      ansible.builtin.service:
+    - name: Start nginx on Ubuntu
+      service:
         name: nginx
         state: started
         enabled: yes
       when: ansible_distribution == "Ubuntu"
 
-    - name: Install httpd in Fedora
-      ansible.builtin.dnf:
+    - name: Install httpd on Fedora
+      dnf:
         name: httpd
         state: present
       when: ansible_distribution == "Fedora"
 
-    - name: Start httpd in Fedora
-      ansible.builtin.service:
+    - name: Start httpd on Fedora
+      service:
         name: httpd
         state: started
         enabled: yes
