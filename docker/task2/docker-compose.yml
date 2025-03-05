@@ -9,7 +9,7 @@ services:
       - default_link
   db:
     container_name: postgres_container
-    image: postgres
+    image: postgres:latest
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: abc_123
