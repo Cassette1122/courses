@@ -1,2 +1,3 @@
 /docker/task5/db/*
 /docker/task4/logs/*.log
+/ansible/task5/password.yml
