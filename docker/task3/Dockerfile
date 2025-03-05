@@ -1,4 +1,4 @@
-FROM golang AS builder
+FROM golang:latest AS builder
 WORKDIR /app
 COPY . .
 RUN go build -o /bin/hello_wrold_go ./main.go
