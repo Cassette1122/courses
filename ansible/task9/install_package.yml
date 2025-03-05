@@ -1,0 +1,31 @@
+---
+- name: Install nginx in Ubuntu and httpd in Fedora
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install nginx on Ubuntu
+      apt:
+        name: "nginx={{ nginx_version }}"
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Start nginx on Ubuntu
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install httpd on Fedora
+      dnf:
+        name: "httpd-{{ httpd_version }}"
+        state: present
+      when: ansible_distribution == "Fedora"
+
+    - name: Start httpd on Fedora
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Fedora"

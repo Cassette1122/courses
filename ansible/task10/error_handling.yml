@@ -1,0 +1,25 @@
+---
+- name: Error handling
+  hosts: all
+  become: yes
+  tasks:
+    - name: Try to install package
+      block:
+        - name: Install package on Ubuntu
+          apt:
+            name: dskfk_f32dew
+            state: present
+            update_cache: yes
+          when: ansible_distribution == "Ubuntu"
+
+        - name: Install package on Fedora
+          dnf:
+            name: mcksmdckds_for43
+            state: present
+            update_cache: yes
+          when: ansible_distribution == "Fedora"
+
+      rescue:
+        - name: Write error message
+          debug:
+            msg: "Пакет не найден"

@@ -1,0 +1,9 @@
+---
+- name: Using templates Jinja2
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy template to nodes
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html/

@@ -1,0 +1,6 @@
+---
+- name: Configuring web servers on the nodes
+  hosts: all
+  become: yes
+  roles:
+    - web_server
